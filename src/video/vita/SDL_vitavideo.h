@@ -48,6 +48,14 @@ typedef struct SDL_GLDriverData
 } SDL_GLDriverData;
 #endif
 
+#ifdef SDL_VIDEO_VITA_VGL
+#include <vitaGL.h>
+typedef struct SDL_GLDriverData
+{
+    uint32_t swapinterval;
+} SDL_GLDriverData;
+#endif
+
 struct SDL_VideoData
 {
     bool egl_initialized; // OpenGL device initialization status
@@ -91,11 +99,15 @@ extern bool VITA_SetWindowGrab(SDL_VideoDevice *_this, SDL_Window *window, bool 
 extern void VITA_DestroyWindow(SDL_VideoDevice *_this, SDL_Window *window);
 
 #ifdef SDL_VIDEO_DRIVER_VITA
-#ifdef SDL_VIDEO_VITA_PVR_OGL
+#if defined(SDL_VIDEO_VITA_PVR_OGL) || defined(SDL_VIDEO_VITA_VGL)
 // OpenGL functions
 extern bool VITA_GL_LoadLibrary(SDL_VideoDevice *_this, const char *path);
 extern SDL_GLContext VITA_GL_CreateContext(SDL_VideoDevice *_this, SDL_Window *window);
 extern SDL_FunctionPointer VITA_GL_GetProcAddress(SDL_VideoDevice *_this, const char *proc);
+#endif
+
+#ifdef SDL_VIDEO_VITA_VGL
+extern  void VITA_GLES_DefaultProfileConfig(SDL_VideoDevice *_this, int *mask, int *major, int *minor);
 #endif
 
 // OpenGLES functions
