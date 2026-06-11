@@ -151,7 +151,7 @@ jobs:
         run: |
           python -m pip install --user ${{ matrix.platform.pypi-packages }}
       - name: 'Set up GLES for VITA'  # Must be after apk
-        if: ${{ matrix.platform.setup-vita-gles-type != '' }}
+        if: ${{ matrix.platform.setup-vita-gles-type != '' && matrix.platform.setup-vita-gles-type != 'vitagl' }}
         uses: ./.github/actions/setup-vita-gles
         with:
           type: ${{ matrix.platform.setup-vita-gles-type }}
