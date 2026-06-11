@@ -30,6 +30,19 @@
 #ifdef SDL_PLATFORM_IOS
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#elif defined(SDL_VIDEO_VITA_VGL)
+#include <vitaGL.h>
+
+#define GL_FUNC_ADD_OES                                         0x8006
+#define GL_FUNC_SUBTRACT_OES                                    0x800A
+#define GL_FUNC_REVERSE_SUBTRACT_OES                            0x800B
+#define GL_UNPACK_ALIGNMENT                                     0x0CF5
+#define GL_FRAMEBUFFER_OES                                      0x8D40
+#define GL_COLOR_ATTACHMENT0_OES                                0x8CE0
+#define GL_FRAMEBUFFER_COMPLETE_OES                             0x8CD5
+#define GL_FRAMEBUFFER_BINDING_OES                              0x8CA6
+#define GL_MAX_EXT                                              GL_MAX
+#define GL_MIN_EXT                                              GL_MIN
 #else
 #include <GLES2/gl2platform.h>
 #include <GLES2/gl2.h>
@@ -47,5 +60,9 @@
 #endif /* _MSC_VER */
 
 #ifndef APIENTRY
+#ifdef GL_APIENTRY
 #define APIENTRY GL_APIENTRY
+#else
+#define APIENTRY
+#endif
 #endif
