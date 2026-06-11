@@ -102,8 +102,7 @@ SDL_GLContext VITA_GLES_CreateContext(SDL_VideoDevice *_this, SDL_Window *window
 bool VITA_GLES_MakeCurrent(SDL_VideoDevice *_this, SDL_Window *window, SDL_GLContext context)
 {
     if (!vgl_initialized) {
-        SDL_SetError("vitaGL is not initialized");
-        return -1;
+        return SDL_SetError("vitaGL is not initialized");
     }
 
     glFinish();
@@ -127,8 +126,7 @@ bool VITA_GLES_SetSwapInterval(SDL_VideoDevice *_this, int interval)
 bool VITA_GLES_GetSwapInterval(SDL_VideoDevice *_this, int *interval)
 {
     if (!vgl_initialized) {
-        SDL_SetError("vitaGL is not initialized");
-        return -1;
+        return SDL_SetError("vitaGL is not initialized");
     }
     *interval = _this->gl_data->swapinterval;
     return true;
@@ -139,8 +137,7 @@ bool VITA_GLES_SwapWindow(SDL_VideoDevice *_this, SDL_Window *window)
     SDL_VideoData *videodata = _this->internal;
 
     if (!vgl_initialized) {
-        SDL_SetError("vitaGL is not initialized");
-        return -1;
+        return SDL_SetError("vitaGL is not initialized");
     }
 
     if (videodata->ime_active) {
@@ -155,12 +152,10 @@ bool VITA_GLES_SwapWindow(SDL_VideoDevice *_this, SDL_Window *window)
 bool VITA_GLES_DestroyContext(SDL_VideoDevice *_this, SDL_GLContext context)
 {
     if (!vgl_initialized) {
-        SDL_SetError("vitaGL is not initialized");
-        return false;
+        return SDL_SetError("vitaGL is not initialized");
     }
 
     glFinish();
-
     return true;
 }
 
